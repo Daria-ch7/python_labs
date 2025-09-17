@@ -1,0 +1,12 @@
+n=int(input())
+k1=0
+k2=0
+for i in range(n):
+    name=input()
+    age=int(input())
+    form=bool(input())
+    if form==True:
+        k1+=1
+    else:
+        k2+=1
+print(k1,k2)
