@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-# python_lab
+﻿# python_lab
 ### 1 номер
 
 ```
@@ -59,6 +58,3 @@ print(f'Длина: {long}')
 ```
 ![05_initials_and_len](/images/lab1.5.png)
 
-=======
-"# ��1" 
->>>>>>> 80db6462813fd2797bb34e012e1242b84cc4643e
