@@ -6,7 +6,7 @@ name=input('Имя:')
 age=int(input('Возраст:'))
 print(f'Привет, {name}! Через год тебе будет {age+1}.')
 ```
-![01_greeting](/images/лаб1.1.png)
+![01_greeting](./images/lab1/лаб1.1.png)
 
 ### 2 номер
 
@@ -17,7 +17,7 @@ sum=a+b
 avg=(a+b)/2
 print(f'sum={sum:.2f}; avg={avg:.2f}')
 ```
-![02_sum_avg](/images/lab1.2.png)
+![02_sum_avg](./images/lab1/lab1.2.png)
 
 ### 3 номер
 
@@ -32,7 +32,7 @@ print(f'База после скидки: {base:.2f} ₽')
 print(f'НДС: {vat_amount:.2f} ₽')
 print(f'Итого к оплате: {total:.2f} ₽')
 ```
-![03_discount_vat](/images/lab1.3.png)
+![03_discount_vat](./images/lab1/lab1.3.png)
 
 ### 4 номер
 
@@ -42,7 +42,7 @@ hours=m//60
 minutes=m-(60*hours)
 print(f'{hours}:{minutes:02d}')
 ```
-![04_minutes_to_hhmm](/images/lab1.4.png)
+![04_minutes_to_hhmm](./images/lab1/lab1.4.png)
 
 ### 5 номер 
 
@@ -61,7 +61,7 @@ long=len(name)+2
 print(f'Инициалы: {initsial}')
 print(f'Длина(символов): {long}')
 ```
-![05_initials_and_len](/images/lab1.5.png)
+![05_initials_and_len](./images/lab1/lab1.5.png)
 
 ## Лабораторная работа 2
 
