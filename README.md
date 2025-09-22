@@ -112,3 +112,41 @@ def flatten(mat: list[list | tuple]) -> list:
 print(flatten(([1, 2], (3, 4, 5))))
 ```
 ![arrays.py](/images/lab2/lab2.1(3).png)
+
+
+### Задание В
+### 2
+
+```
+def row_sums(mat: list[list[float | int]]) -> list[list]:
+    
+    if len(mat)>0:
+        for i in range(len(mat)-1):
+            if len(mat[i])!=len(mat[i+1]): return ValueError
+    symma=[]
+    for stroka in mat:
+        symma.append(sum(stroka))
+    return symma
+
+print(row_sums([[-1,1],[10,-10]]))
+```
+![matrix.py](/images/lab2/lab2.B(2).png)
+
+### 3
+
+```
+def col_sums(mat: list[list[float | int]]) -> list[list]:
+    if len(mat)>0:
+        for i in range(len(mat)-1):
+            if len(mat[i])!=len(mat[i+1]): return ValueError
+
+    syms = list(0 for x in range(len(mat[0])))
+
+    for i in range(len(mat)):
+        for j in range(len(mat[i])):
+            syms[j]+=mat[i][j]
+
+    return syms
+print(col_sums([[1, 2, 3], [4, 5, 6]]))
+```
+![matrix.py](/images/lab2/lab2.B(3).png)
