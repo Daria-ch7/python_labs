@@ -1,4 +1,4 @@
-﻿# python_lab
+﻿## Лабораторная работа 1
 ### 1 номер
 
 ```
@@ -47,14 +47,68 @@ print(f'{hours}:{minutes:02d}')
 ### 5 номер 
 
 ```
-name=input()
-short_name=''
-for i in name.split():
-    short_name+=i[:1]
-long=len(name)
-print(f'ФИО: {name}')
-print(f'Инициалы: {short_name}')
-print(f'Длина: {long}')
+name=input('ФИО:')
+name=name.split()
+
+initsial=[name[i][0] for i in range(len(name))]
+
+initsial=''.join(initsial)
+
+name=''.join(name)
+long=len(name)+2
+
+
+print(f'Инициалы: {initsial}')
+print(f'Длина(символов): {long}')
 ```
 ![05_initials_and_len](/images/lab1.5.png)
 
+## Лабораторная работа 2
+
+### Задание 1
+### 1
+
+```
+def min_max(nums: list[float | int]) -> tuple[float | int, float | int]:
+    if len(nums)==0:
+        return ValueError
+
+    maxi=-10**10
+    mini=10**10
+
+    for i in range(len(nums)):
+        if nums[i] > maxi:
+            maxi = nums[i]
+        if nums[i] < mini:
+            mini = nums[i]
+
+    return (mini, maxi)
+nums=[-5, -2, -9]
+print(min_max(nums))
+```
+![arrays.py](/images/lab2/lab2.1(1).png)
+
+### 2
+
+```
+def unique_sorted(nums: list[float | int]) -> list[float | int]:
+    return sorted(set(nums))
+print(unique_sorted([1.0, 1, 2.5, 2.5, 0]))
+```
+![arrays.py](/images/lab2/lab2.1(2).png)
+
+### 3
+
+```
+def flatten(mat: list[list | tuple]) -> list:
+    itog=[]
+    for element in mat:
+        if isinstance(element,(list,tuple)):
+            for member in element:
+                itog.append(member)
+        else:
+            return TypeError
+    return itog
+print(flatten(([1, 2], (3, 4, 5))))
+```
+![arrays.py](/images/lab2/lab2.1(3).png)

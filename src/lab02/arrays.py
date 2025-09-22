@@ -13,10 +13,13 @@ def min_max(nums: list[float | int]) -> tuple[float | int, float | int]:
 
     return (mini, maxi)
 nums=[-5, -2, -9]
+print(min_max(nums))
 
 
 def unique_sorted(nums: list[float | int]) -> list[float | int]:
     return sorted(set(nums))
+print(unique_sorted([1.0, 1, 2.5, 2.5, 0]))
+
 
 
 def flatten(mat: list[list | tuple]) -> list:
