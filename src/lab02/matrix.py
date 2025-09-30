@@ -9,17 +9,20 @@ def transpose(mat: list[list[float | int]]) -> list[list]:
         for i in range(len(mat)-1):
             if len(mat[i])!=len(mat[i+1]): return ValueError
             '''прохожусь по эл-ам матрицы и сравниваю их длины, если они разные, выводим ошибку'''
-    result=[]
-    '''пустая матрица для рузультата, где кол-во строк=кол-во столбцов, в кол-во столбцов=кол-во строк'''
-    for i in range(len(mat[0])):
-        '''беру каждый столбец исходной матрицы'''
+    transposed=[]
+    num_rows=len(mat)
+    num_cols=len(mat[0])
+    '''пустая матрица для рузультата, где кол-во строк=длина первой строки исходной матрицы, а кол-во столбцов=кол-во строк исходной матрицы'''
+    for i in range(num_cols):
+        '''прохожусь по индексам столбцов исходной матрицы (это будут строки в новой)'''
         new_row=[]
-        for j in range(len(mat)):
-            '''беру каждую строку матрицы''' 
+        for j in range(num_rows):
+            '''прохожусь по индексам строк исходной матрицы (столбцы в новой)''' 
             new_row.append(mat[j][i])
-            result.append(new_row)
-    return result
-print(transpose([[1,2,3]]))
+        transposed.append(new_row)
+   
+    return transposed
+print(transpose([[1, 2], [3, 4]]))
 
 
 def row_sums(mat: list[list[float | int]]) -> list[float]:
