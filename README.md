@@ -213,13 +213,18 @@ print(col_sums([[1, 2, 3], [4, 5, 6]]))
 ```
 def format_record(rec: tuple[str, str, float]) -> str:
     '''на вход подается кортеж, который инвертируется в строку'''
+
+    if len(rec)!=3:
+        return ValueError
     
     name=rec[0].strip()
     group=rec[1].strip()
     gpa=rec[2]
+
+    
     
 
-    if ( (len(name)>1) + (len(group)!=0) + (isinstance(gpa, float)) )!=3:
+    if ( (len(name)>1) + ( (len(group)!=0) and isinstance(group, str) ) + (isinstance(gpa, float)) )!=3:
         return ValueError
     '''делаю проверку всех условий (если что-то неправильно, выводится ошибка)'''
     
