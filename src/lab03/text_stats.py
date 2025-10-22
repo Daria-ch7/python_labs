@@ -1,11 +1,11 @@
 import sys #чтобы использовать стандартный ввод 
-from src.lib.text import normalize, tokenize, count_freq, top_n
+from lib.text import normalize, tokenize, count_freq, top_n
 
 def main():
 
-    text=sys.stdin.read().strip()#читаю весь ввод до EOF (ctr+Z+En)
+    text=sys.stdin.read()#читаю весь ввод до EOF (ctr+Z+En)
     if not text: #если нет ничего на входе
-        return "текст не виден"
+        return "текста нет"
 
     normalized_text = normalize(text)
     tokens = tokenize(normalized_text)
@@ -14,10 +14,9 @@ def main():
     print("Всего слов:", len(tokens))
     print("Уникальных слов:", len(count_word))
     print('Топ-5:')
-    for word, count in top:
+    for word, count in top_words:
         print(f'{word}:{count}')
-if __name__ == "__main__":
-    main()
+print(main())
 
 
 

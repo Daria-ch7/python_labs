@@ -16,7 +16,7 @@ def normalize(text: str, *, casefold: bool = True, yo2e: bool = True) -> str:
     text=' '.join(text) #соединяю эдементы в списке(слова) через пробел
 
     return text
-print(normalize("Hello\r\nWorld"))
+
 
 
 
@@ -29,7 +29,7 @@ def tokenize(text: str) -> list[str]:
     tokens=re.findall(pattern,text)
 
     return tokens
-print(tokenize("emoji 😀 не слово"))
+
 
 
 
@@ -41,7 +41,7 @@ def count_freq(tokens: list[str]) -> dict[str, int]:
         word_count[word]=word_count.get(word,0)+1 #если слово есть в словаре, то get возвращает его количество, если нет, то 0
 
     return(word_count)
-print(count_freq(["bb","aa","bb","aa","cc"]))
+
 
 
 
@@ -59,27 +59,3 @@ freq_dict = count_freq(tokens)
 
 result = top_n(freq_dict, 2)
 
-print(result)
-
-
-
-import sys #чтобы использовать стандартный ввод 
-#from src.lib.text import normalize, tokenize, count_freq, top_n
-
-def main():
-
-    text=sys.stdin.read()#читаю весь ввод до EOF (ctr+Z+En)
-    if not text: #если нет ничего на входе
-        return "текст не виден"
-
-    normalized_text = normalize(text)
-    tokens = tokenize(normalized_text)
-    count_word = count_freq(tokens)
-    top_words = top_n(count_word, 5)
-    print("Всего слов:", len(tokens))
-    print("Уникальных слов:", len(count_word))
-    print('Топ-5:')
-    for word, count in top_words:
-        print(f'{word}:{count}')
-        
-print(main())
