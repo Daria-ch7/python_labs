@@ -24,11 +24,12 @@ import re
 
 def tokenize(text: str) -> list[str]:
 
-    pattern= r'\b\w+(?:-\w+)*\b'
+    pattern= r'\w+(?:-\w+)*'
 
     tokens=re.findall(pattern,text)
 
     return tokens
+print(tokenize("emoji 😀 не слово"))
 
 
 

@@ -276,7 +276,7 @@ def normalize(text: str, *, casefold: bool = True, yo2e: bool = True) -> str:
     text=' '.join(text) #соединяю эдементы в списке(слова) через пробел
 
     return text
-print(normalize("ПрИвЕт\nМИр\t"))
+print(normalize("Hello\r\nWorld"))
 ```
 ![tuples.py](images/lab3/lab3.1.png)
 
@@ -291,12 +291,12 @@ def tokenize(text: str) -> list[str]:
     В качестве слова считаем последовательности символов \w (буквы/цифры/подчёркивание) плюс дефис внутри слова (например, по-настоящему).
     Числа (например, 2025) считаем словами.
     
-    b - граница слова
+    
     #\w+ - одна или более букв/цифр/подчёркиваний
     (?:-\w+)* - ноль или более повторов: дефис + буквы/цифры
-    pattern= r'\b\w+(?:-\w+)*\b'
-
     '''
+
+    pattern= r'\w+(?:-\w+)*'
 
     tokens=re.findall(pattern,text)
 
