@@ -251,7 +251,7 @@ print(format_record( ("  сидорова  анна   сергеевна ", "ABB
 
 ### 1
 
-```
+```py
 def normalize(text: str, *, casefold: bool = True, yo2e: bool = True) -> str:
 
     '''
@@ -281,7 +281,7 @@ print(normalize("Hello\r\nWorld"))
 ![tuples.py](images/lab3/lab3.1.png)
 
 ### 2
-```
+```py
 import re
 
 def tokenize(text: str) -> list[str]:
@@ -306,7 +306,7 @@ print(tokenize("emoji 😀 не слово"))
 ![tuples.py](images/lab3/lab3.2.png)
 
 ### 3
-```
+```py
 def count_freq(tokens: list[str]) -> dict[str, int]:
 
     '''
@@ -325,7 +325,7 @@ print(count_freq(["bb","aa","bb","aa","cc"]))
 
 
 ### 4
-```
+```py
 def top_n(freq: dict[str, int], n: int = 5) -> list[tuple[str, int]]:
 
     '''
@@ -349,7 +349,7 @@ print(result)
 ![tuples.py](images/lab3/lab3.4.png)
 
 ### B
-```
+```py
 import sys #чтобы использовать стандартный ввод 
 from lib.text import normalize, tokenize, count_freq, top_n
 
