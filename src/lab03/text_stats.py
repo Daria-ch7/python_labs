@@ -1,4 +1,5 @@
-import sys #чтобы использовать стандартный ввод 
+import sys #чтобы использовать стандартный ввод
+sys.path.append('c:/Users/daria/OneDrive/Рабочий стол/python_labs/src')
 from lib.text import normalize, tokenize, count_freq, top_n
 
 def main():
@@ -16,7 +17,5 @@ def main():
     print('Топ-5:')
     for word, count in top_words:
         print(f'{word}:{count}')
-print(main())
-
-
+main()
 

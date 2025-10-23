@@ -29,7 +29,6 @@ def tokenize(text: str) -> list[str]:
     tokens=re.findall(pattern,text)
 
     return tokens
-print(tokenize("emoji 😀 не слово"))
 
 
 
@@ -41,7 +40,7 @@ def count_freq(tokens: list[str]) -> dict[str, int]:
     for word in tokens:
         word_count[word]=word_count.get(word,0)+1 #если слово есть в словаре, то get возвращает его количество, если нет, то 0
 
-    return(word_count)
+    return word_count
 
 
 
@@ -54,9 +53,9 @@ def top_n(freq: dict[str, int], n: int = 5) -> list[tuple[str, int]]:
 
     return sorted_word[:n]
 
-tokens=["bb","aa","bb","aa","cc"]
+#tokens=["bb","aa","bb","aa","cc"]
 
-freq_dict = count_freq(tokens)
+#freq_dict = count_freq(tokens)
 
-result = top_n(freq_dict, 2)
+#result = top_n(freq_dict, 2)
 
