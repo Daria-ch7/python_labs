@@ -361,7 +361,7 @@ from lib.text import normalize, tokenize, count_freq, top_n
 
 def main():
 
-    text=sys.stdin.read().strip() #читаю весь ввод до EOF (ctr+Z+En)
+    text=sys.stdin.read()#читаю весь ввод до EOF (ctr+Z+En)
     if not text: #если нет ничего на входе
         return "текст не виден"
 
