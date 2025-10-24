@@ -336,9 +336,10 @@ def top_n(freq: dict[str, int], n: int = 5) -> list[tuple[str, int]]:
     Вернуть топ-N по убыванию частоты; при равенстве — по алфавиту слова.
     '''
 
-    sorted_word=sorted(freq.items(), key=lambda x: (x[1]),reverse=1) #сортирую по количеству от большего к меньшему; items-делает из словаря список кортежей 
+    sorted_word=sorted(freq.items(), key=lambda x: (x[1]), reverse=1) #сортирую по количеству от большего к меньшему; items-делает из словаря список кортежей 
 
     sorted_word=sorted(freq.items(), key=lambda x: (x[0])) #сортирую по алфавиту
+    '''Создаёт функцию с параметром x; для каждого элемента (у меня x) беру определенное, по чему буду сортировать'''
 
     return sorted_word[:n]
 
