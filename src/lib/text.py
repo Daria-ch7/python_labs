@@ -31,7 +31,6 @@ def tokenize(text: str) -> list[str]:
     return tokens
 
 
-
 def count_freq(tokens: list[str]) -> dict[str, int]:
 
     word_count={}
@@ -55,6 +54,3 @@ def top_n(freq: dict[str, int], n: int = 5) -> list[tuple[str, int]]:
 tokens=["bb","aa","bb","aa","cc"]
 
 freq_dict = count_freq(tokens)
-
-
-
