@@ -485,7 +485,8 @@ def sorted_word_counts(freq: dict[str,int]) -> list[tuple[str, int]]:
     Выыодится:
         отсортированный список
     '''
-    return sorted(freq.items(), key=lambda x: (-x[1],x[0]))
+    return sorted(freq.items(), key=lambda x: (-x[1],x[0])) #Создаёт функцию с параметром x; для каждого элемента возвращает то, по чему будет производиться сортировка
+
 ```
 ![tuples.py](images/lab4/lab4.A.scv.png)
 
@@ -495,6 +496,20 @@ import sys
 sys.path.append('c:/Users/daria/OneDrive/Рабочий стол/python_labs/src')
 from lib.text import normalize, tokenize, count_freq, top_n
 from io_txt_csv import read_text, write_csv
+
+'''
+Анализ текста и сохранение отчёта в CSV.
+Действия:
+    1. Чтение входного текстового файла (data/input.txt).
+    2. Нормализация и токенизация текста (функции из src/lib/text.py).
+    3. Подсчёт частоты слов.
+    4. Сохранение результата в CSV (data/report.csv)
+        с заголовком: word,count (отсортировано по убыванию частоты, затем по слову).
+    5. Вывод в консоле:
+        - количество всех слов
+        - количество уникальных слов
+        - топ-5 слов (в табличной форме или в виде списка).
+'''
 
 p=read_text("data/input.txt") 
 norm_p=normalize(p) #возвращает строку
@@ -511,5 +526,6 @@ for x,y in top[:5]:
     print(f'{x}:{y}')
 ```
 ![tuples.py](images/lab4/lab4.B.png)
+![tuples.py](images/lab4/lab4.B2.png)
 
 
