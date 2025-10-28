@@ -102,5 +102,3 @@ def sorted_word_counts(freq: dict[str,int]) -> list[tuple[str, int]]:
     return sorted(freq.items(), key=lambda x: (-x[1],x[0]))
 
 
-txt=read_text("data/testA.txt")
-write_csv([("word","count"),("test",3)], "data/check.csv")

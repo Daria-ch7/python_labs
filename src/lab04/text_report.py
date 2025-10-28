@@ -1,7 +1,8 @@
-import sys #чтобы использовать стандартный ввод
-sys.path.append('c:/Users/daria/OneDrive/Рабочий стол/python_labs/src')
-from lib.text import normalize, tokenize, count_freq, top_n
+import sys
+sys.path.append('c:/Users/daria/OneDrive/Рабочий стол/python_labs')
 from io_txt_csv import read_text, write_csv
+from lib.text import normalize, tokenize, count_freq, top_n
+
 
 p=read_text("data/input.txt")
 norm_p=normalize(p)

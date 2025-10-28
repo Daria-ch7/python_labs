@@ -393,7 +393,7 @@ import csv
 
 from typing import Iterable, Sequence
 
-from collections import Counter
+from collections import Counter #сам создает словарь 
 
 
 def read_text(path: str | Path, encoding: str = "utf-8") -> str:
@@ -450,7 +450,7 @@ def write_csv(rows: Iterable[Sequence], path: str | Path, header: tuple[str, ...
         if len(rows[i-1])!=len(rows[i]):
             raise ValueError
 
-    with p.open("w", newline="", encoding="utf-8") as f:#открываю файл для записи
+    with p.open("w", newline="", encoding="utf-8") as f:#открываю файл для записи, newline=""-контролирует, чтобы не было лишних переносов
         w=csv.writer(f) #специальный объект для записи СSV
         if header is not None:
             w.writerow(header)#если указаны заголовки, то они записываются первой строкой
@@ -487,16 +487,16 @@ def sorted_word_counts(freq: dict[str,int]) -> list[tuple[str, int]]:
     '''
     return sorted(freq.items(), key=lambda x: (-x[1],x[0]))
 ```
-![tuples.py](images/lab4/lab4.A.csv.png)
+![tuples.py](images/lab4/lab4.A.scv.png)
 
 ### B
 ```py
-import sys #чтобы использовать стандартный ввод
+import sys
 sys.path.append('c:/Users/daria/OneDrive/Рабочий стол/python_labs/src')
 from lib.text import normalize, tokenize, count_freq, top_n
 from io_txt_csv import read_text, write_csv
 
-p=read_text("data/input.txt")
+p=read_text("data/input.txt") 
 norm_p=normalize(p) #возвращает строку
 tokens=tokenize(norm_p) #возвращает список
 count_word=count_freq(tokens) #возвращает словарь
