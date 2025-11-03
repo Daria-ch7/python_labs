@@ -1,0 +1,30 @@
+[
+  {
+    "student_id": "S001",
+    "first_name": "Иван",
+    "last_name": "Петров",
+    "group": "A-101",
+    "grade": 4.5
+  },
+  {
+    "student_id": "S002", 
+    "first_name": "Мария",
+    "last_name": "Иванова",
+    "group": "A-101",
+    "grade": 4.8
+  },
+  {
+    "student_id": "S003",
+    "first_name": "Алексей",
+    "last_name": "Сидоров", 
+    "group": "B-202",
+    "grade": 4.2
+  },
+  {
+    "student_id": "S004",
+    "first_name": "Ольга",
+    "last_name": "Кузнецова",
+    "group": "A-101", 
+    "grade": 4.9
+  }
+]

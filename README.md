@@ -529,3 +529,185 @@ for x,y in top[:5]:
 ![tuples.py](images/lab4/lab4.B2.png)
 
 
+## Лабораторная работа 5
+### A
+```py
+import json
+import csv
+from pathlib import Path
+
+def json_to_csv(json_path: str, csv_path: str) -> None:
+
+    """
+    Преобразовать JSON-файл в CSV.
+
+    Подаётся:
+        json_path: путь к JSON-файлу (строка или Path).
+        csv_path: путь к создаваемому CSV-файлу (строка или Path).
+        encoding: кодировка для чтения и записи файлов (по умолчанию "utf-8").
+
+    Действие:
+        - Читает JSON.
+        - Определяет заголовки по ключам первого словаря.
+        - Создаёт CSV с заголовком и строками из JSON.
+
+    Ошибки:
+        FileNotFoundError: Если JSON-файл отсутствует.
+        ValueError: Если JSON пустой, не является списком словарей
+                    или имеет неподдерживаемую структуру.
+                    Если JSON-файл содержит синтаксические ошибки.
+    """
+
+    file_json=Path(json_path)#преобразуем поданный файл в умный объект, с которым легче работать
+
+    #проверка на существование файла
+    if not file_json.exists():
+        raise FileNotFoundError
+
+    #прочитываю файл, фиксирую ошибки
+    try:
+        with file_json.open('r',encoding='utf-8') as f:
+            dano=json.load(f)
+    except json.JSONDecodeError:
+        raise ValueError("неподдерживаемая структура")
+
+    #проверка структуры данных (JSON должем иметь вид списка)
+    except not isinstance(dano,list):
+        raise ValueError("JSON должен быть быть в виде списка объектов")
+
+    #проверка наличия данных в файле
+    except len(dano)==0:
+        raise ValueError("JSON файл пуст")
+
+    #проверка каждого элемента (они должны быть словарями)
+    except not all(isinstance(item, dict) for item in dano):
+        raise ValueError("Каждый элемент JSON должны быть словарями")
+
+    with open(csv_path, 'w', newline='', encoding='utf-8') as f:
+            writer = csv.DictWriter(f, fieldnames=tuple(dano[0].keys()))#объект, которыймеет записывать словари в CSV
+            writer.writeheader()
+            writer.writerows(dano)
+
+
+def csv_to_json(csv_path: str, json_path: str) -> None:
+
+    """
+    Преобразовать CSV-файл в JSON.
+
+    Подаётся:
+        csv_path: путь к CSV-файлу (строка или Path).
+        json_path: путь к создаваемому JSON-файлу (строка или Path).
+        encoding: кодировка для чтения и записи файлов (по умолчанию "utf-8").
+
+    Действие:
+        - Читает CSV с заголовком.
+        - Преобразует строки CSV в список словарей.
+        - Записывает JSON с отступами для удобного чтения.
+
+    Ошибки:
+        FileNotFoundError: Если CSV-файл отсутствует.
+        ValueError: Если CSV не содержит заголовков или пуст.
+                    Если структура CSV-файла некорректна.
+    """
+    file_csv=Path(csv_path)
+    
+    if not file_csv.exists():
+        raise FileNotFoundError("Файл не найден")
+    
+    if file_csv.suffix != ".csv":
+        raise ValueError("Неверный тип данных")
+    
+    with open(file_csv, "r", encoding='utf-8') as f:
+        reader=csv.DictReader(f)
+
+        if reader.fieldnames is None:
+            raise ValueError("Отсутствуют заголовки в файле")
+        dano=list(reader)
+    if len(dano)==0:
+        raise ValueError("Пустой файл")
+    
+    with open(json_path, "w", encoding='utf-8') as f:
+        json.dump(dano, f, ensure_ascii=False, indent=2)
+```
+![alt text](images/lab5/lab5(csv-json).png)
+![alt text](images/lab5/lab5(json-csv).png)
+![alt text](images/lab5/lab5my_test.png)
+![alt text](images/lab5/lab5my_test2.png)
+
+### B
+```py
+import csv
+from pathlib import Path
+from openpyxl import Workbook
+from openpyxl.utils import get_column_letter
+
+def csv_to_xlsx(csv_path: str, xlsx_path: str) -> None:
+
+    """
+    Преобразует CSV-файл в Excel (XLSX) с проверкой структуры и корректности данных.
+
+    CSV-файл должен содержать строку заголовков и хотя бы одну строку данных.
+    Каждая колонка CSV будет перенесена в отдельный столбец листа Excel.
+
+    Аргументы:
+        csv_path: Путь к исходному CSV-файлу.
+        xlsx_path: Путь к создаваемому XLSX-файлу.
+
+
+    Ошибки:
+        FileNotFoundError: Если CSV-файл отсутствует.
+        ValueError: Если CSV не содержит заголовков или пуст.
+                Если структура CSV-файла некорректна.
+    """
+
+    csv_file=Path(csv_path)
+    if not csv_file.exists():
+        raise FileNotFoundError("Файл не найден")
+    if csv_file.suffix != '.csv':
+        raise ValueError("Неверный тип файла")
+    
+    
+    #создание excel книги
+    wb=Workbook() #создаем новую книгу эксель
+    ws=wb.active #получаем активный лист(по умолчанию создаётся один)
+    ws.title="Sheet1"#переименовали лист
+
+    with open(csv_path, 'r', encoding='utf-8') as f:
+        reader= csv.DictReader(f) #читает сsv как словари (первая строка автоматич - ключи словаря)
+        rows = list(reader)
+    if len(rows)==0:
+        raise ValueError("Файл не содержит данных")
+    if not reader.fieldnames: #проверяем наличие заголовков(fildnames содержит названия колонок из первой стр)
+        raise ValueError("Файл не содержит заголовка")
+    
+    ws.append(reader.fieldnames) #записываем заголовки в первою строку таблицы
+
+    r_count=0 #счетчик, чтобы проверить если ли данные, кроме заголовков
+    for row in rows:
+        r_count+=1
+
+        data_for_ex=[] #то, что буду добавлять в эксель
+        for title in reader.fieldnames:
+            data_for_ex.append(row[title]) #добавляю значения в правильном порядке(как заголовки)
+        ws.append(data_for_ex)
+    if r_count == 0:
+        raise ValueError("Нет данных")
+    
+
+    for col_index in range(1,len(reader.fieldnames)+1): #собираем индексы колонок, начиная с 1
+        column_letter=get_column_letter(col_index) #ф-ция, преобразует числовой индекс колонки в букву (как в эксель)
+        max_len=0
+
+        #находим макс длину слова в колонке
+        for row in ws[column_letter]:
+            if row.value is not None: #проверка существования значения в ячейке
+                max_len=max(max_len,len(str(row.value)))
+        #устанавливаем ширину(не менее 8 символов)
+        m_width=max(max_len+2, 8)
+        ws.column_dimensions[column_letter].width =m_width #это встроенное свойство объекта Worksheet в библиотеке(предоставляет доступ к управлению колонками листа эксель)
+
+
+    xlsx_path = Path(xlsx_path)
+    wb.save(xlsx_path)
+```
+
