@@ -45,15 +45,12 @@ def json_to_csv(json_path: str, csv_path: str) -> None:
         raise ValueError("Каждый элемент JSON должны быть словарями")
 
     with open(csv_path, 'w', newline='', encoding='utf-8') as f:
-            writer = csv.DictWriter(f, fieldnames=tuple(dano[0].keys()))
+            header=tuple(dano[0].keys())
+            writer = csv.DictWriter(f, fieldnames=header)
             writer.writeheader()
             writer.writerows(dano)
 
 
-
-
-
-
             
 
-json_to_csv("data/samples/people.json","data/out/people.csv")
+json_to_csv("data/samples/people.json","data/out/people_from_json.csv")

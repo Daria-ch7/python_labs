@@ -567,25 +567,23 @@ def json_to_csv(json_path: str, csv_path: str) -> None:
     #прочитываю файл, фиксирую ошибки
     try:
         with file_json.open('r',encoding='utf-8') as f:
-            dano=json.load(f)
-    except json.JSONDecodeError:
+            dano=json.load(f)#загрузка из файла
+    except json.JSONDecodeError: #специальный класс исключений, отлавливает синтаксические ошибки, пустой файл/строку, неполные структуры) 
         raise ValueError("неподдерживаемая структура")
 
-    #проверка структуры данных (JSON должем иметь вид списка)
+    #проверка типа данных (JSON должем быть списком)
     except not isinstance(dano,list):
         raise ValueError("JSON должен быть быть в виде списка объектов")
 
-    #проверка наличия данных в файле
-    except len(dano)==0:
-        raise ValueError("JSON файл пуст")
-
-    #проверка каждого элемента (они должны быть словарями)
+    
+    #проверка на тип каждого элемента (они должны быть словарями)
     except not all(isinstance(item, dict) for item in dano):
         raise ValueError("Каждый элемент JSON должны быть словарями")
 
     with open(csv_path, 'w', newline='', encoding='utf-8') as f:
-            writer = csv.DictWriter(f, fieldnames=tuple(dano[0].keys()))#объект, которыймеет записывать словари в CSV
-            writer.writeheader()
+            header=tuple(dano[0].keys()) #берем заголовки как в первом объекте
+            writer = csv.DictWriter(f, fieldnames=header) #объект, который записывает список словарей в CSV
+            writer.writeheader() 
             writer.writerows(dano)
 
 
@@ -614,11 +612,11 @@ def csv_to_json(csv_path: str, json_path: str) -> None:
     if not file_csv.exists():
         raise FileNotFoundError("Файл не найден")
     
-    if file_csv.suffix != ".csv":
+    if file_csv.suffix != ".csv": #проверка на расширение файла (.suffix - свойство объекта Path)
         raise ValueError("Неверный тип данных")
     
     with open(file_csv, "r", encoding='utf-8') as f:
-        reader=csv.DictReader(f)
+        reader=csv.DictReader(f) #читает csv как список словарей 
 
         if reader.fieldnames is None:
             raise ValueError("Отсутствуют заголовки в файле")
@@ -627,7 +625,13 @@ def csv_to_json(csv_path: str, json_path: str) -> None:
         raise ValueError("Пустой файл")
     
     with open(json_path, "w", encoding='utf-8') as f:
-        json.dump(dano, f, ensure_ascii=False, indent=2)
+        json.dump(dano, f, ensure_ascii=False, indent=2) #записывает в файл
+         '''
+        dano - что записываем
+        f -  куда записываем
+        ensure_ascii=False - корректная работа с кириллицей
+        indent=2 - красивый вывод
+        '''
 ```
 ![alt text](images/lab5/lab5(csv-json).png)
 ![alt text](images/lab5/lab5(json-csv).png)
@@ -682,33 +686,27 @@ def csv_to_xlsx(csv_path: str, xlsx_path: str) -> None:
     
     ws.append(reader.fieldnames) #записываем заголовки в первою строку таблицы
 
-    r_count=0 #счетчик, чтобы проверить если ли данные, кроме заголовков
+    #добавляем в каждую строку таблицы
     for row in rows:
-        r_count+=1
-
-        data_for_ex=[] #то, что буду добавлять в эксель
         for title in reader.fieldnames:
-            data_for_ex.append(row[title]) #добавляю значения в правильном порядке(как заголовки)
-        ws.append(data_for_ex)
-    if r_count == 0:
-        raise ValueError("Нет данных")
+            ws.append(row[title]) #добавляю значения в правильном порядке(как заголовки)
     
 
     for col_index in range(1,len(reader.fieldnames)+1): #собираем индексы колонок, начиная с 1
         column_letter=get_column_letter(col_index) #ф-ция, преобразует числовой индекс колонки в букву (как в эксель)
+        
         max_len=0
-
         #находим макс длину слова в колонке
         for row in ws[column_letter]:
             if row.value is not None: #проверка существования значения в ячейке
                 max_len=max(max_len,len(str(row.value)))
-        #устанавливаем ширину(не менее 8 символов)
-        m_width=max(max_len+2, 8)
-        ws.column_dimensions[column_letter].width =m_width #это встроенное свойство объекта Worksheet в библиотеке(предоставляет доступ к управлению колонками листа эксель)
+        #устанавливаем ширину колонки(не менее 8 символов)
+        m_width=max(max_len+2, 8) #+2 для отступов
+        ws.column_dimensions[column_letter].width =m_width #это встроенное свойство объекта Worksheet в библиотеке(предоставляет доступ к управлению колонками листа эксель). сейчас применяется свойство, определяющее ширину колонки
 
 
     xlsx_path = Path(xlsx_path)
-    wb.save(xlsx_path)
+    wb.save(xlsx_path) #сохранение изменений в указанном пути
 ```
 ![alt text](images/lab5/xlsx.png)
 
