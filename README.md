@@ -710,4 +710,5 @@ def csv_to_xlsx(csv_path: str, xlsx_path: str) -> None:
     xlsx_path = Path(xlsx_path)
     wb.save(xlsx_path)
 ```
+![alt text](images/lab5/xlsx.png)
 
