@@ -19,7 +19,6 @@ def normalize(text: str, *, casefold: bool = True, yo2e: bool = True) -> str:
 
 
 
-
 import re
 
 def tokenize(text: str) -> list[str]:

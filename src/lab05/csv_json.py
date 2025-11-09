@@ -4,6 +4,24 @@ from pathlib import Path
 
 
 def csv_to_json(csv_path: str, json_path: str) -> None:
+    """
+    Преобразовать CSV-файл в JSON.
+
+    Подаётся:
+        csv_path: путь к CSV-файлу (строка или Path).
+        json_path: путь к создаваемому JSON-файлу (строка или Path).
+        encoding: кодировка для чтения и записи файлов (по умолчанию "utf-8").
+
+    Действие:
+        - Читает CSV с заголовком.
+        - Преобразует строки CSV в список словарей.
+        - Записывает JSON с отступами для удобного чтения.
+
+    Ошибки:
+        FileNotFoundError: Если CSV-файл отсутствует.
+        ValueError: Если CSV не содержит заголовков или пуст.
+                    Если структура CSV-файла некорректна.
+    """
     file_csv=Path(csv_path)
     
     if not file_csv.exists():
