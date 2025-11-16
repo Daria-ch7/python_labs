@@ -1,8 +1,33 @@
 import argparse
 from pathlib import Path
-from src.lib.text import tokenize, count_freq, top_n
+
+from src.lib.text import count_freq, tokenize, top_n
+
 
 def main():
+    """
+    Обернуть функции анализа текста текста в CLI-оболочку с помощью argparse.
+
+    Предоставляет две подкоманды:
+        1. cat   — вывод содержимого текстового файла (с нумерацией строк при флаге -n);
+        2. stats — анализ частот встречаемости слов в тексте.
+
+    Подкоманды:
+        cat --input <path> [-n]
+            Выводит содержимое файла построчно.
+            При указании флага -n добавляет нумерацию строк.
+
+        stats --input <path> [--top N]
+            Подсчитывает частоты слов в тексте, выводит N наиболее частых.
+            Использует функции из модуля src.lib.text:
+                - tokenize(text)
+                - count_freq(tokens)
+                - top_n(freq, n)
+
+    Ошибки:
+        FileNotFoundError — если указанный файл не найден.
+        ValueError — если текст пустой или содержит некорректные данные.
+    """
     parser = argparse.ArgumentParser(description="CLI-утилиты лабораторной №6")
     subparsers=parser.add_subparsers(dest="command", help="Доступные соманды")
 
@@ -20,7 +45,7 @@ def main():
     file=Path(args.input)
 
     if not file.exists():
-        raise FileNotFoundError("Файл не найден")
+        parser.error("Файл не найден")
     
 
     if args.command == "cat":

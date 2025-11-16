@@ -1,6 +1,7 @@
-import json
 import csv
+import json
 from pathlib import Path
+
 
 def json_to_csv(json_path: str, csv_path: str) -> None:
 
@@ -38,10 +39,10 @@ def json_to_csv(json_path: str, csv_path: str) -> None:
     except not isinstance(dano,list):
         raise ValueError("JSON должен быть быть в виде списка объектов")
 
-    except len(dano)==0:
+    if len(dano)==0:
         raise ValueError("JSON файл пуст")
 
-    except not all(isinstance(item, dict) for item in dano):
+    if not all(isinstance(item, dict) for item in dano):
         raise ValueError("Каждый элемент JSON должны быть словарями")
 
     with open(csv_path, 'w', newline='', encoding='utf-8') as f:

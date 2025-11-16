@@ -1,8 +1,25 @@
 import argparse
-from src.lib.json_csv import json_to_csv, csv_to_json
+
 from src.lib.csv_xlsx import csv_to_xlsx
+from src.lib.json_csv import csv_to_json, json_to_csv
+
 
 def main():
+    """
+    Обернуть функции конвертации текста в CLI-оболочку с помощью argparse.
+
+    Предоставляет возможность конвертировать файлы между форматами:
+        JSON <-> CSV и CSV -> XLSX.
+
+    Подкоманды:
+        json_to_csv — конвертировать JSON в CSV
+        csv_to_json — конвертировать CSV в JSON
+        csv_to_xlsx — конвертировать CSV в XLSX
+
+    Ошибки:
+        FileNotFoundError — если указанный входной файл не существует.
+        ValueError — если структура входных данных некорректна.
+    """
     parser = argparse.ArgumentParser(description="Конвертер данных между форматами")
     subparsers = parser.add_subparsers(dest="command", help="Доступные команды конвертации")
 

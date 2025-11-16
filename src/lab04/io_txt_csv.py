@@ -1,13 +1,11 @@
-import sys 
+import sys
+
 sys.path.append('c:/Users/daria/OneDrive/Рабочий стол/python_labs/src')
 
-from pathlib import Path
-
-import csv 
-
-from typing import Iterable, Sequence
-
+import csv
 from collections import Counter
+from pathlib import Path
+from typing import Iterable, Sequence
 
 
 def read_text(path: str | Path, encoding: str = "utf-8") -> str:

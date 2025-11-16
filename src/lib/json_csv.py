@@ -1,6 +1,7 @@
-import json
 import csv
+import json
 from pathlib import Path
+
 
 def json_to_csv(json_path: str, csv_path: str) -> None:
 

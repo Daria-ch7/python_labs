@@ -1,10 +1,12 @@
+import re
+
 def normalize(text: str, *, casefold: bool = True, yo2e: bool = True) -> str:
 
-    if casefold==True:
+    if casefold == True:
         text=text.casefold()
         #привожу к нижнему регистру
         
-    if yo2e==True:
+    if yo2e == True:
         text=text.replace('ё','е').replace('Ё','Е')
         #заменяю ё/Ё
 
@@ -19,7 +21,6 @@ def normalize(text: str, *, casefold: bool = True, yo2e: bool = True) -> str:
 
 
 
-import re
 
 def tokenize(text: str) -> list[str]:
 
@@ -44,8 +45,7 @@ def count_freq(tokens: list[str]) -> dict[str, int]:
 
 def top_n(freq: dict[str, int], n: int = 5) -> list[tuple[str, int]]:
 
-    sorted_word=sorted(freq.items(), key=lambda x: (x[0])) #сортирую по алфавиту
-    sorted_word=sorted(freq.items(), key=lambda x: (x[1]),reverse=1) #сортирую количеству в обратном порядке
+    sorted_word = sorted(freq.items(),key=lambda x: (-x[1], x[0]))
 
 
     return sorted_word[:n]

@@ -1,7 +1,9 @@
 import csv
 from pathlib import Path
+
 from openpyxl import Workbook
 from openpyxl.utils import get_column_letter
+
 
 def csv_to_xlsx(csv_path: str, xlsx_path: str) -> None:
 

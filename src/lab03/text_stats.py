@@ -1,6 +1,8 @@
-import sys #чтобы использовать стандартный ввод
+import sys  #чтобы использовать стандартный ввод
+
 sys.path.append('c:/Users/daria/OneDrive/Рабочий стол/python_labs/src')
-from lib.text import normalize, tokenize, count_freq, top_n
+from lib.text import count_freq, normalize, tokenize, top_n
+
 
 def main():
 

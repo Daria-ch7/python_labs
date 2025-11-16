@@ -1,7 +1,9 @@
 import sys
+
 sys.path.append('c:/Users/daria/OneDrive/Рабочий стол/python_labs')
 from io_txt_csv import read_text, write_csv
-from lib.text import normalize, tokenize, count_freq, top_n
+
+from lib.text import count_freq, normalize, tokenize, top_n
 
 '''
 Анализ текста и сохранение отчёта в CSV.
