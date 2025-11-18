@@ -912,32 +912,37 @@ def test_normalize(src, expected): #сам тест
 def test_tokenize(src, expected):
     assert tokenize(src) == expected
 
-#подаю слова, проверка счетчика и топа
-def test_count_and_top():
-    tokens = ["a","b","a","c","b","a"]
-    freq = count_freq(tokens)
-    assert freq == {"a":3, "b":2, "c":1}
-    assert top_n(freq, 2) == [("a",3), ("b",2)]
+@pytest.mark.parametrize(
+        "tokens, expected",
+        [
+            (["a", "b", "a", "c", "b", "a"], {"a": 3, "b": 2, "c": 1}),
+            (["good","good","good"], {"good":3}),
+            (["💕","💕","💕","🤷‍♀️"],{"💕":3,"🤷‍♀️":1}),
+        ],
+)
+def test_count_freq(tokens, expected):
+    assert count_freq(tokens) == expected
 
-#проверка при равенстве частот (надо в алфавитном порядке)
-def test_top_tie_breaker():
-    freq = count_freq(["bb","aa","bb","aa","cc"])
-    assert top_n(freq, 2) == [("aa",2), ("bb",2)]
+@pytest.mark.parametrize(
+        "words, n, expected",
+        [
+        ({"c":6, "a":6, "b":2}, 2, [("a", 6), ("c", 6)]),
+        ({"a": 3, "b": 2}, 5, [("a", 3), ("b", 2)]),
+        ],
+)
 
-#тесты для пустых входных данных
-def test_dop():
+def test_top_n(words, n, expected):
+    assert top_n(words, n) == expected
+
+def test_empty():
     assert normalize("") == ""
     assert tokenize("") == []
     assert count_freq([]) == {}
     assert top_n({}, 5) == []
-
-#запрос большего N чем есть элементов
-def test_top_dop():
-    freq = {"a": 3, "b": 2}
-    assert top_n(freq, 5) == [("a", 3), ("b", 2)]
 ```
 
 ### Задание В
+
 ```py
 import json, csv
 from pathlib import Path
