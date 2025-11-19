@@ -1,11 +1,11 @@
 import sys
 
-sys.path.append('c:/Users/daria/OneDrive/Рабочий стол/python_labs')
+sys.path.append("c:/Users/daria/OneDrive/Рабочий стол/python_labs")
 from io_txt_csv import read_text, write_csv
 
 from lib.text import count_freq, normalize, tokenize, top_n
 
-'''
+"""
 Анализ текста и сохранение отчёта в CSV.
 Действия:
     1. Чтение входного текстового файла (data/input.txt).
@@ -17,18 +17,18 @@ from lib.text import count_freq, normalize, tokenize, top_n
         - количество всех слов
         - количество уникальных слов
         - топ-5 слов (в табличной форме или в виде списка).
-'''
+"""
 
-p=read_text("data/input.txt")
-norm_p=normalize(p)
-tokens=tokenize(norm_p)
-count_word=count_freq(tokens)
-top=top_n(count_word)
+p = read_text("data/input.txt")
+norm_p = normalize(p)
+tokens = tokenize(norm_p)
+count_word = count_freq(tokens)
+top = top_n(count_word)
 
 write_csv(top, "data/report.csv", ["word", "count"])
 
 print("Всего слов:", len(tokens))
 print("Уникальных слов:", len(count_word))
 print("Топ-5:")
-for x,y in top[:5]:
-    print(f'{x}:{y}')
+for x, y in top[:5]:
+    print(f"{x}:{y}")

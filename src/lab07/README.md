@@ -126,4 +126,4 @@ def test_missing_file_raises():
 ![alt text](../../images/lab07/test.png)
 
 ### black :
-![alt text](../../images/lab07/black.png)
+![alt text](../../images/lab07/blackk.png)

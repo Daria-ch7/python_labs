@@ -4,7 +4,6 @@ from pathlib import Path
 
 
 def json_to_csv(json_path: str, csv_path: str) -> None:
-
     """
     Преобразовать JSON-файл в CSV.
 
@@ -24,32 +23,33 @@ def json_to_csv(json_path: str, csv_path: str) -> None:
                     или имеет неподдерживаемую структуру.
                     Если JSON-файл содержит синтаксические ошибки.
     """
-   
-    file_json=Path(json_path)
+
+    file_json = Path(json_path)
 
     if not file_json.exists():
         raise FileNotFoundError("файл не найден")
-    
+
     try:
-        with file_json.open('r',encoding='utf-8') as f:
-            dano=json.load(f)
+        with file_json.open("r", encoding="utf-8") as f:
+            dano = json.load(f)
     except json.JSONDecodeError:
         raise ValueError("неподдерживаемая структура")
 
-    except not isinstance(dano,list):
+    except not isinstance(dano, list):
         raise ValueError("JSON должен быть быть в виде списка объектов")
 
-    except len(dano)==0:
+    except len(dano) == 0:
         raise ValueError("JSON файл пуст")
 
     except not all(isinstance(item, dict) for item in dano):
         raise ValueError("Каждый элемент JSON должны быть словарями")
 
-    with open(csv_path, 'w', newline='', encoding='utf-8') as f:
-            header=tuple(dano[0].keys())
-            writer = csv.DictWriter(f, fieldnames=header)
-            writer.writeheader()
-            writer.writerows(dano)
+    with open(csv_path, "w", newline="", encoding="utf-8") as f:
+        header = tuple(dano[0].keys())
+        writer = csv.DictWriter(f, fieldnames=header)
+        writer.writeheader()
+        writer.writerows(dano)
+
 
 def csv_to_json(csv_path: str, json_path: str) -> None:
     """
@@ -70,22 +70,22 @@ def csv_to_json(csv_path: str, json_path: str) -> None:
         ValueError: Если CSV не содержит заголовков или пуст.
                     Если структура CSV-файла некорректна.
     """
-    file_csv=Path(csv_path)
-    
+    file_csv = Path(csv_path)
+
     if not file_csv.exists():
         raise FileNotFoundError("Файл не найден")
-    
+
     if file_csv.suffix != ".csv":
         raise ValueError("Неверный тип данных")
-    
-    with open(file_csv, "r", encoding='utf-8') as f:
-        reader=csv.DictReader(f)
+
+    with open(file_csv, "r", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
 
         if reader.fieldnames is None:
             raise ValueError("Отсутствуют заголовки в файле")
-        dano=list(reader)
-    if len(dano)==0:
+        dano = list(reader)
+    if len(dano) == 0:
         raise ValueError("Пустой файл")
-    
-    with open(json_path, "w", encoding='utf-8') as f:
+
+    with open(json_path, "w", encoding="utf-8") as f:
         json.dump(dano, f, ensure_ascii=False, indent=2)

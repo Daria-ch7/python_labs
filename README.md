@@ -1002,4 +1002,4 @@ def test_missing_file_raises():
         csv_to_json("nope.csv", "out.json")
 ```
 ![alt text](images/lab07/pytest.png)
-![alt text](images/lab07/black.png)
+![alt text](images/lab07/blackk.png)
