@@ -95,7 +95,7 @@ def test_json_to_csv_roundtrip(tmp_path: Path):
 def test_csv_to_json_roundtrip(tmp_path: Path):
     src = tmp_path / "people.csv" #создаем временный csv; записываем данные
     dst = tmp_path / "people.json"
-    src.write_text("name,age\nAlice,22\nBob,25\n", encoding="utf-8")
+    src.write_text("name,age\nAlice,22\nBob,25\n", encoding="utf-8")#записываем в цсв данные
 
     csv_to_json(str(src), str(dst)) #тестируем ф-цию
     obj = json.loads(dst.read_text(encoding="utf-8")) #читаем json (из строки в объект)

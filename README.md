@@ -958,7 +958,7 @@ def write_json(path: Path, obj):
 #читает csv и возвращает список словарей, где ключи - названия колонок
 def read_csv_rows(path: Path):
     with path.open(encoding="utf-8") as f:
-        return list(csv.DictReader(f))
+        return list(csv.DictReader(f))#читает csv, где каждая строка=словарь, собираем их в список
 
 def test_json_to_csv_roundtrip(tmp_path: Path):
     src = tmp_path / "people.json" #создаём временный файл
@@ -967,7 +967,7 @@ def test_json_to_csv_roundtrip(tmp_path: Path):
     write_json(src, data) #записываем тестовые данные
 
     json_to_csv(str(src), str(dst)) #тестируем функцию
-    rows = read_csv_rows(dst) чтение рез-та
+    rows = read_csv_rows(dst) #чтение рез-та
     assert len(rows) == 2
     assert set(rows[0]) >= {"name", "age"} #проверка, что как минимум эти два заголовка имеются
 
