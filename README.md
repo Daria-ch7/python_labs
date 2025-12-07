@@ -1003,3 +1003,29 @@ def test_missing_file_raises():
 ```
 ![alt text](images/lab07/pytest.png)
 ![alt text](images/lab07/blackk.png)
+
+
+
+
+
+
+students=[]
+
+        try:
+            with open (self.csv_path, "r", encoding="utf-8") as f:
+
+
+                #пропускаем первую строку (заголовки)
+                next(f)
+
+                for line in f:
+                    line = line.strip()
+                    if line:  #если сстрока не пустая, то разбиваем по ,
+                        parts = line.split(',')
+                        if len(parts) == 4: #должно быть 4 поля
+                            fio, birthdate, group, gpa = parts
+                            gpa = float(gpa)
+                            students.append(Student(fio,birthdate,group,gpa))
+        except FileNotFoundError:
+            pass
+        return students

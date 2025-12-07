@@ -58,11 +58,6 @@ class Student:
         age=self.count_age()
         group=self.group
         gpa=self.gpa
-        return (
-            f"Студент: {fio}\n"
-            f"Дата рождения: {birthdate} (возраст: {age} лет)\n"
-            f"Группа: {group}\n"
-            f"Средний балл: {gpa}"
-        )
-
+        return (f"{fio} {birthdate} {age} {group} {gpa}")
+    
 
