@@ -44,7 +44,7 @@ def quick_test():
     print()
     
     print("5. Обновление информации о студенте:")
-    if group.update("Петров Петр", gpa=5.0, group="БИВТ-21-4"):
+    if group.update("Петров Петр", gpa=5.0, group="БИВТ-21-9"):
         print("данные у Петра обновлены")
     print()
    

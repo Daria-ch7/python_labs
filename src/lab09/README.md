@@ -161,13 +161,13 @@ _read_all:
 ![alt text](../../images/lab09/1.png)
 
 add:
-![alt text](../../images/lab09/2,3.png) 
+![alt text](../../images/lab09/23.png)
 
 find:
 ![alt text](../../images/lab09/4.png)
 
 update, remove:
-![alt text](../../images/lab09/5,6.png)
+![alt text](../../images/lab09/56.png)
 
 ИТОГ:
 ![alt text](../../images/lab09/7.png)
