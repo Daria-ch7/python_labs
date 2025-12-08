@@ -108,3 +108,10 @@ def sorted_word_counts(freq: dict[str, int]) -> list[tuple[str, int]]:
         отсортированный список
     """
     return sorted(freq.items(), key=lambda x: (-x[1], x[0]))
+
+
+def ensure_parent_dir(path: str | Path) -> None:
+    """функция находит родительскую директорию файла и при ее отсутствии добавляет"""
+    p = Path(path)
+    if p.parent and not p.parent.exists():
+        p.parent.mkdir(parents=True, exist_ok=True)

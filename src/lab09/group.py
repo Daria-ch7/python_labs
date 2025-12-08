@@ -1,25 +1,19 @@
 from src.lab08.models import Student
+from src.lab04.io_txt_csv import ensure_parent_dir, write_csv
 from pathlib import Path
-import os
 import csv
 
 class Group:
     def __init__(self, csv_path: str):
         """инициализация хранилища студентов"""
-        self.csv_path = str(Path(csv_path))
+        self.csv_path = Path(csv_path)
         self._ensure_file_exists()
     
     def _ensure_file_exists(self):
         """создаёт папку и файл, если их нет"""
-        if os.path.exists(self.csv_path):
-            return
-        
-        folder = os.path.dirname(self.csv_path)
-        if folder:
-            os.makedirs(folder, exist_ok=True)
-        
-        with open(self.csv_path, 'w', encoding='utf-8') as f:
-            f.write("fio,birthdate,group,gpa\n")
+        if not self.csv_path.exists():
+            ensure_parent_dir(self.csv_path)
+            write_csv([], self.csv_path, header=("fio", "birthdate", "group", "gpa"))
     
     def _read_all(self):
         """читает всех студентов из файла"""

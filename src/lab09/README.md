@@ -3,7 +3,7 @@
 ```py
 from src.lab08.models import Student
 from pathlib import Path
-import os
+from src.lab04.io_txt_csv import ensure_parent_dir, write_csv
 import csv
 
 class Group:
@@ -16,21 +16,11 @@ class Group:
 
 #ВСПОМОГАТЕЛЬНЫЕ МЕТОДЫ (ПРИВАТНЫЕ)
     def _ensure_file_exists(self):
-        """создаем папку, если ее нет, создаем CSV-файл с заголовками, если его нет"""
-        #проверка существования файла/папки по указ. пути (если есть, ничего не делаем)
+        """создаёт папку и файл, если их нет"""
+        if not self.csv_path.exists():
+            ensure_parent_dir(self.csv_path)
+            write_csv([], self.csv_path, header=("fio", "birthdate", "group", "gpa"))
 
-        if os.path.exists(self.csv_path):
-            return
-        
-        folder = os.path.dirname(self.csv_path) 
-        #извлекает путь к папке из полного пути к файлу
-        
-        if folder: #проверяем есть ли папка в пути
-            os.makedirs(folder, exist_ok=True)
-
-        #создание файла с заголовками
-        with open(self.csv_path, 'w', encoding='utf-8') as f:
-            f.write("fio,birthdate,group,gpa\n")
     
     def _read_all(self):
         """читаем всех студентов из файла"""
