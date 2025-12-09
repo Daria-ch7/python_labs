@@ -313,4 +313,4 @@ class SinglyLinkedList:
         return ",".join(values)
 ```
 ### пример
-![alt text](image.png)  ![alt text](image-1.png)
+![alt text](image.png)  ![alt text](../../images/lab10/список2.png)
